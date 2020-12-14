@@ -11,7 +11,7 @@ function create_myconfig() {
 
 create_myconfig
 
-if [ ! -f /data/config.py ]; then
+if [ ! -d /data/promnesia ]; then
   echo 'No config.py detected, creating new one. Please edit it and try again'
   python -m promnesia config create 
   exit -1
