@@ -1,0 +1,7 @@
+FROM ljachym/docker-promnesia:latest
+
+USER root
+RUN apt-get update && apt-get install -y cron
+RUN echo "0-59/1 * * * * promnesia python -m promnesia index --config /data/promnesia/config.py > /proc/1/fd/1 2>/proc/1/fd/2" >> /etc/crontab
+
+ENTRYPOINT [ "cron", "-f" ]

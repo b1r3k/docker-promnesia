@@ -5,6 +5,8 @@ COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 RUN useradd -ms /bin/bash promnesia
 RUN pip install -e git+https://github.com/karlicoss/promnesia.git@v1.0.20201125#egg=promnesia[all]
+# required by HPI pocket module
+RUN pip install -e git+https://github.com/karlicoss/pockexport#egg=pockexport
 VOLUME /data
 
 EXPOSE 13131
