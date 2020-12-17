@@ -1,7 +1,11 @@
 FROM ljachym/docker-promnesia:latest
+MAINTAINER lukasz <dot> jachym <at> gmail <dot> com
 
+ENV CRON_LOG="/var/log/cron.log"
 USER root
-RUN apt-get update && apt-get install -y cron
-RUN echo "0-59/1 * * * * promnesia python -m promnesia index --config /data/promnesia/config.py > /proc/1/fd/1 2>/proc/1/fd/2" >> /etc/crontab
+RUN apt-get update && apt-get install -y cron sudo
+COPY indexer-entrypoint.sh /
+RUN chmod 0755 /*.sh
+RUN touch ${CRON_LOG} && chmod 0775 ${CRON_LOG} && chown root:${PROMNESIA_USER} ${CRON_LOG}
 
-ENTRYPOINT [ "cron", "-f" ]
+ENTRYPOINT ["/indexer-entrypoint.sh"]
