@@ -14,7 +14,7 @@ RUN pip install -e git+https://github.com/karlicoss/promnesia.git@$PROMNESIA_VER
 RUN pip install -e git+https://github.com/karlicoss/pockexport#egg=pockexport
 RUN pip install -e git+https://github.com/karlicoss/hypexport#egg=hypexport
 # google takeout module
-RUN pip install -e git+https://github.com/seanbreckenridge/google_takeout_parser#egg=google_takeout_parser
+RUN pip install google_takeout_parser
 VOLUME /data
 
 EXPOSE 13131
