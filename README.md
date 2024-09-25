@@ -4,18 +4,21 @@
 
 ## Build for Raspberry PI
 
-    docker buildx build --platform linux/arm64,linux/amd64,linux/amd64 -t <LOGIN>/docker-promnesia --push .
+    docker buildx build --platform linux/arm64,linux/amd64 -t <LOGIN>/docker-promnesia --push .
 
 or with specific version
     
     docker buildx build --build-arg PROMNESIA_VERSION=v1.1.20230129 --platform linux/arm64,linux/amd64 -t ljachym/docker-promnesia:v1.1.20230129 --push .
 
-Builds available here: https://hub.docker.com/r/ljachym/docker-promnesia 
+Builds are available here: https://hub.docker.com/r/ljachym/docker-promnesia 
 
 ## Running arm64 version on amd64 host
 
+    docker run --platform linux/arm64 ljachym/docker-promnesia:v1.1.20230129
+
+it may be needed to install/update binfmt for arm64 support
+
     docker run --privileged --rm tonistiigi/binfmt --install arm64
-    docker run --platform linux/arm64 --name=promnesia-arm64 ljachym/docker-promnesia:v1.1.20230129
 
 ## Running indexer
 
