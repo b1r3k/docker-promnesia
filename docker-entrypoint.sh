@@ -22,6 +22,9 @@ fi
 if [ ! -f /data/promnesia.sqlite ]; then
   echo 'No database detected, creating new one...'
   python -m promnesia index
+else
+  echo "Checking database integrity..."
+  sqlite3 /data/promnesia.sqlite "PRAGMA integrity_check;"
 fi
 
 if [ "$1" = 'promnesia' ]; then

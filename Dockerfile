@@ -13,6 +13,11 @@ ENV PYTHONFAULTHANDLER 1
 ENV PYTHONUNBUFFERED 1
 ENV BUILD_VERSION "$PROMNESIA_VERSION $TARGETPLATFORM $TARGETARCH"
 
+RUN apt-get -qq update && \
+    apt-get -qq install --no-install-recommends sqlite3 sqlite3-tools && \
+    update-ca-certificates --fresh && \
+    apt-get -qq upgrade --no-install-recommends
+
 RUN mkdir /data
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
